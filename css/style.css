@@ -1,0 +1,27 @@
+.hide {
+    display: none;
+}
+
+ul.list-unstyled.inline {
+    width: 50px;
+    display: inline-block;
+
+
+}
+
+ul.list-unstyled.inline li:hover {
+    cursor: pointer;
+    color: #141619;
+    background-color: #d3d3d4;
+    border-color: #bcbebf;
+}
+
+
+#player1,
+#player2,
+#player3,
+#player4 {
+    padding: 20px;
+    box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1), 0 0 0 2px rgb(255, 255, 255),
+        0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+}

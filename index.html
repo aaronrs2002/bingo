@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link href="css/style.css" rel="stylesheet">
+
+    <title>Bingo</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 id="selectedItem" class="text-center text-uppercase">The selected number is...</h1>
+                <div id="calledList"></div>
+            </div>
+            <div class="col-md-3" id="player1">
+            </div>
+            <div class="col-md-3" id="player2">
+            </div>
+            <div class="col-md-3" id="player3">
+            </div>
+            <div class="col-md-3" id="player4">
+            </div>
+            <div class="d-grid gap-2 col-12 mx-auto">
+                <button class="btn btn-primary" onClick="startCalling()" id="callSquare">Next Square</button>
+                <h2 id="announcement"></h2>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+<script src="js/functionality.js"></script>
+
+</html>
+
+<!--
+    https://en.wikipedia.org/wiki/Bingo_(American_version)#Bingo_cards
+    A typical Bingo game utilizes the numbers 1 through 75. The five columns of the card are labeled 'B', 'I', 'N', 'G', and 'O' from left to right. 
+    The center space is usually marked "Free" or "Free Space", and is considered automatically filled. 
+    The range of printed numbers that can appear on the card is normally restricted by column, with the 'B' column only containing numbers between 1 and 15 inclusive, 
+    the 'I' column containing only 16 through 30, 'N' containing 31 through 45, 'G' containing 46 through 60, and 'O' containing 61 through 75.
+-->
