@@ -25,14 +25,14 @@ function checkForBingo() {
         for (let j = 2; j < 7; j++) {
 
             let ckReset = [theB, theI, theN, theG, theO, row2, row3, row4, row5, row6];
-            console.log("START RUNNING PLAYTER: " + players[i] + " - ckReset: " + ckReset);
+
 
             if (document.querySelector("div#" + players[i] + "  .alert-success[data-rowid='" + j + "']") !== null) {
 
                 [].forEach.call(document.querySelectorAll("div#" + players[i] + " .alert-success[data-rowid='" + j + "']"), function (e) {
                     let theRowId = j;
                     let theColumID = document.querySelector("div#" + players[i] + "  .alert-success[data-rowid='" + j + "']").getAttribute("data-columnid");
-                    console.log("Player: " + players[i] + " theColumID: " + theColumID + " - theRowId: " + j);
+                    // console.log("Player: " + players[i] + " theColumID: " + theColumID + " - theRowId: " + j);
                     switch (theRowId) {
                         case 2:
                             row2 = row2 + 1;
@@ -72,6 +72,7 @@ function checkForBingo() {
 
                 let ckWinners = [theB, theI, theN, theG, theO, row2, row3, row4, row5, row6];
                 if (ckWinners.indexOf(5) !== -1) {
+                    console.log("WINNING PLAYER: " + players[i] + " - ckReset: " + ckReset);
                     document.getElementById("announcement").innerHTML = "BINGO! " + players[i] + " is the WINNER!";
                     document.getElementById("callSquare").classList.add("hide");
                     document.getElementById(players[i]).classList.add("alert-primary");
@@ -126,7 +127,7 @@ function startCalling() {
         a = 61;
     }
 
-    console.log("calledPublically: " + calledPublically + " - " + targetLength);
+    //  console.log("calledPublically: " + calledPublically + " - " + targetLength);
     while (calledPublically.length < targetLength) {
 
         let theNumber = Math.floor(a + Math.random() * (b - a));
@@ -213,14 +214,14 @@ function runGame(target) {
             a = 61;
         }
 
-        cardHTML = cardHTML + "<ul class='list-unstyled inline'>";
+        cardHTML = cardHTML + "<ul class='list-unstyled inlineColumns'>";
         let usedNumbers = [];
         while (usedNumbers.length < 6) {
             let theNumber = Math.floor(a + Math.random() * (b - a));
             if (usedNumbers.indexOf(theNumber) === -1) {
                 usedNumbers.push(theNumber);
                 if (usedNumbers.length === 1) {
-                    cardHTML = cardHTML + "<li><h3  class='text-capitalize text-center''>" + columns[j] + "</h3></li>";
+                    cardHTML = cardHTML + "<li><h3  class='text-capitalize text-center pt-2'>" + columns[j] + "</h3></li>";
                 } else {
                     let clickFunc = "";
                     if (target === "player1") {

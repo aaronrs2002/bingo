@@ -12,8 +12,8 @@
     <link href="https://bootswatch.com/5/spacelab/bootstrap.css" rel="stylesheet" id="themedStyle">
 
     <link rel="stylesheet" href="https://aaronrs2002.github.io/black-jack/css/animate.min.css" />
-
-
+    <link href="https://aaronrs2002.github.io/black-jack/css/shared.css" rel="stylesheet">
+    <link href="https://aaronrs2002.github.io/black-jack/css/style.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 
     <title>Bingo</title>
@@ -27,23 +27,39 @@
                 <h1 id="selectedItem" class="text-center text-uppercase">The selected number is...</h1>
                 <div id="calledList"></div>
             </div>
-            <div class="col-md-3" id="player1">
+            <div class="d-grid gap-2 col-12 mx-auto px-0">
+                <button class="btn btn-primary  px-0" onClick="startCalling()" id="callSquare">Next Square</button>
+                <h2 id="announcement" class="text-uppercase"></h2>
             </div>
-            <div class="col-md-3" id="player2">
+            <div class="col-md-3 alert-light d-flex justify-content-center" id="player1">
             </div>
-            <div class="col-md-3" id="player3">
+            <div class="col-md-3 alert-light d-flex justify-content-center" id="player2">
             </div>
-            <div class="col-md-3" id="player4">
+            <div class="col-md-3 alert-light d-flex justify-content-center" id="player3">
             </div>
-            <div class="d-grid gap-2 col-12 mx-auto">
-                <button class="btn btn-primary" onClick="startCalling()" id="callSquare">Next Square</button>
-                <h2 id="announcement" class=""></h2>
+            <div class="col-md-3 alert-light d-flex justify-content-center" id="player4">
             </div>
+
         </div>
     </div>
-
+    <div class="hide alert fadeInUp" role="alert" id="globalAlert"></div>
+    <footer class="footer mt-auto py-3 animated fadeInUp">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="btn-group block my-2" role="group" id="gameLinks"></div>
+                </div>
+                <div class="col-md-2 my-2"> <select class="form-control" onChange="changeTheme()" id="themes"></select>
+                </div>
+                <div class="col-md-4" id="socialList">
+                </div>
+                <div class="col-md-2 my-3" id="year"></div>
+            </div>
+        </div>
+    </footer>
 
 </body>
+<script src="https://aaronrs2002.github.io/black-jack/js/footer.js"></script>
 <script src="js/functionality.js"></script>
 
 </html>
