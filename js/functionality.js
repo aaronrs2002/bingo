@@ -10,27 +10,85 @@ let announcement = "";
 
 function checkForBingo() {
 
-    function youWin() {
-
-        document.getElementById("announcement").innerHTML = "BINGO! " + players[i] + " is the WINNER!";
-        document.getElementById("callSquare").classList.add("hide");
-
-    }
-
     for (let i = 0; i < players.length; i++) {
+        let theB = 0;
+        let theI = 0;
+        let theN = 0;
+        let theG = 0;
+        let theO = 0;
+        let row2 = 0;
+        let row3 = 0;
+        let row4 = 0;
+        let row5 = 0;
+        let row6 = 0;
 
         for (let j = 2; j < 7; j++) {
-            let successNumber = [];
-            if (document.querySelector("div#" + players[i] + " ul.list-unstyled.inline li.alert-success[data-rowid='" + j + "']")) {
 
-                [].forEach.call(document.querySelector("div#" + players[i] + " ul.list-unstyled.inline li.alert-success[data-rowid='" + j + "']"), function () {
-                    successNumber.push(j);
-                })
-                console.log("successNumber: " + successNumber)
-                if (successNumber.length === 5) {
-                    youWin();
+            let ckReset = [theB, theI, theN, theG, theO, row2, row3, row4, row5, row6];
+            console.log("START RUNNING PLAYTER: " + players[i] + " - ckReset: " + ckReset);
+
+            if (document.querySelector("div#" + players[i] + "  .alert-success[data-rowid='" + j + "']") !== null) {
+
+                [].forEach.call(document.querySelectorAll("div#" + players[i] + " .alert-success[data-rowid='" + j + "']"), function (e) {
+                    let theRowId = j;
+                    let theColumID = document.querySelector("div#" + players[i] + "  .alert-success[data-rowid='" + j + "']").getAttribute("data-columnid");
+                    console.log("Player: " + players[i] + " theColumID: " + theColumID + " - theRowId: " + j);
+                    switch (theRowId) {
+                        case 2:
+                            row2 = row2 + 1;
+                            break;
+                        case 3:
+                            row3 = row3 + 1;
+                            break;
+                        case 4:
+                            row4 = row4 + 1;
+                            break;
+                        case 5:
+                            row5 = row5 + 1;
+                            break;
+                        case 6:
+                            row6 = row6 + 1;
+                            break;
+                    }
+                    switch (theColumID) {
+                        case "b":
+                            theB = theB + 1;
+                            break;
+                        case "i":
+                            theI = theI + 1;
+                            break;
+                        case "n":
+                            theN = theN + 1;
+                            break;
+                        case "g":
+                            theG = theG + 1;
+                            break;
+                        case "o":
+                            theO = theO + 1;
+                            break;
+                    }
+
+                });
+
+                let ckWinners = [theB, theI, theN, theG, theO, row2, row3, row4, row5, row6];
+                if (ckWinners.indexOf(5) !== -1) {
+                    document.getElementById("announcement").innerHTML = "BINGO! " + players[i] + " is the WINNER!";
+                    document.getElementById("callSquare").classList.add("hide");
+                    document.getElementById(players[i]).classList.add("alert-primary");
                 }
+
+
             }
+            theB = 0;
+            theI = 0;
+            theN = 0;
+            theG = 0;
+            theO = 0;
+            row2 = 0;
+            row3 = 0;
+            row4 = 0;
+            row5 = 0;
+            row6 = 0;
 
         }
 
@@ -129,6 +187,9 @@ function runGame(target) {
     calledListHTML = "";
     let cardHTML = "";
     document.getElementById("announcement").innerHTML = "";
+    for (let i = 0; i < players.length; i++) {
+        document.getElementById(players[i]).classList.remove("alert-primary");
+    }
 
 
     for (let j = 0; j < columns.length; j++) {
