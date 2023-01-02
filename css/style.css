@@ -1,8 +1,6 @@
 ul.list-unstyled.inlineColumns {
     width: 50px;
     display: inline-block;
-
-
 }
 
 ul.list-unstyled.inline li:hover {

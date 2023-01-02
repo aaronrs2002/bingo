@@ -71,10 +71,23 @@ function checkForBingo() {
                 });
 
                 let ckWinners = [theB, theI, theN, theG, theO, row2, row3, row4, row5, row6];
+                console.log("WINNING PLAYER: " + players[i] + " - ckWinners: " + ckWinners);
                 if (ckWinners.indexOf(5) !== -1) {
-                    console.log("WINNING PLAYER: " + players[i] + " - ckReset: " + ckReset);
-                    document.getElementById("announcement").innerHTML = "BINGO! " + players[i] + " is the WINNER!";
+                    let message = "BINGO! " + players[i] + " is the WINNER!";
+                    let alertLevel = "alert-danger";
+                    if (players[i] === "player1") {
+                        message = "BINGO! YOU FREAKIN WON!";
+                        alertLevel = "alert-success";
+                    }
+
+                    document.getElementById("announcement").innerHTML = message;
+                    globalAlert(alertLevel, message);
+                    setTimeout(() => {
+                        document.getElementById("startGame").classList.remove("hide");
+                    }, 3000);
+
                     document.getElementById("callSquare").classList.add("hide");
+                    document.getElementById(players[i]).classList.remove("alert-light");
                     document.getElementById(players[i]).classList.add("alert-primary");
                 }
 
@@ -127,7 +140,7 @@ function startCalling() {
         a = 61;
     }
 
-    //  console.log("calledPublically: " + calledPublically + " - " + targetLength);
+
     while (calledPublically.length < targetLength) {
 
         let theNumber = Math.floor(a + Math.random() * (b - a));
@@ -143,12 +156,7 @@ function startCalling() {
             calledListHTML = calledListHTML + "<span class='badge bg-warning text-dark mx-1 text-capitalize'>" + offering + "</span>";
             document.getElementById("calledList").innerHTML = calledListHTML;
         }
-
-
     }
-
-
-
 
 
     upToFour = upToFour + 1;
@@ -190,11 +198,16 @@ function runGame(target) {
     document.getElementById("announcement").innerHTML = "";
     for (let i = 0; i < players.length; i++) {
         document.getElementById(players[i]).classList.remove("alert-primary");
+        document.getElementById(players[i]).classList.add("alert-light");
+        let player = "Player: " + (i + 1);
+        if (i === 0) {
+            player = "You"
+        }
+        document.querySelector("label[data-details='" + (i + 1) + "']").innerHTML = player + " <i class='fas fa-user'></i>";
     }
 
 
     for (let j = 0; j < columns.length; j++) {
-
         let b = 15;
         let a = 1;
         if (j === 1) {
@@ -215,7 +228,10 @@ function runGame(target) {
         }
 
         cardHTML = cardHTML + "<ul class='list-unstyled inlineColumns'>";
+
+
         let usedNumbers = [];
+
         while (usedNumbers.length < 6) {
             let theNumber = Math.floor(a + Math.random() * (b - a));
             if (usedNumbers.indexOf(theNumber) === -1) {
@@ -232,12 +248,13 @@ function runGame(target) {
                     } else {
                         cardHTML = cardHTML + "<li data-value='" + columns[j] + theNumber + "' data-rowid='" + usedNumbers.length + "' data-columnid='" + columns[j] + "' " + clickFunc + " class='text-center'>" + theNumber + "</li>";
                     }
-
-
                 }
             }
         }
+
         cardHTML = cardHTML + "</ul>";
+
+
     }
     document.getElementById(target).innerHTML = cardHTML;
 
@@ -246,6 +263,15 @@ function runGame(target) {
 
 
 
-for (let i = 0; i < players.length; i++) {
-    runGame(players[i]);
+function startGame() {
+    document.getElementById("calledList").innerHTML = "";
+    document.getElementById("startGame").classList.add("hide");
+    document.getElementById("callSquare").classList.remove("hide");
+    for (let i = 0; i < players.length; i++) {
+        runGame(players[i]);
+    }
+
 }
+
+
+
