@@ -27,16 +27,54 @@
 
     <div class="container">
         <div class="row">
+
+
+            <div class="btn-group form-control mb-2  animated fadeInDown" role="group" id="startGame">
+                <button type="button" class="btn btn-primary dealAmt" alt="1" onClick="startGame(Number(1))">$1</button>
+                <button type="button" class="btn btn-primary dealAmt" alt="5" onClick="startGame(Number(5))">$5</button>
+                <button type="button" class="btn btn-primary dealAmt" alt="10"
+                    onClick="startGame(Number(10))">$10</button>
+                <button type="button" class="btn btn-primary dealAmt" alt="25"
+                    onClick="startGame(Number(25))">$25</button>
+                <button type="button" class="btn btn-primary dealAmt" alt="50"
+                    onClick="startGame(Number(50))">$50</button>
+                <button type="button" class="btn btn-primary dealAmt" alt="100"
+                    onClick="deal(Number(100))">$100</button>
+            </div>
+
+
             <div class="col-md-12">
-                <h1 id="selectedItem" class="text-center text-uppercase">Welcome to BINGO</h1>
+                <div class="alert alert-info" role="alert">
+                    <div class="row">
+                        <div class="col-3">
+                            <h3>Balance: $<span id="playerMoney"></span></h3>
+                        </div>
+                        <div class="col-3">
+                            <h3 id="betTarget"></h3>
+                        </div>
+                        <div class="col-6">
+
+                            <h3 id="selectedItem" class="text-center text-uppercase">Welcome to BINGO</h3>
+                        </div>
+
+                    </div>
+                    <h3 id="announcement" class="text-uppercase"></h3>
+                </div>
 
             </div>
+
+
+
+
+
+
+
             <div class="d-grid gap-2 col-12 mx-auto px-0">
                 <button class="btn btn-primary  px-0 hide" onClick="startCalling()" id="callSquare">Select
                     Square</button>
-                <button class="btn btn-primary  px-0" onClick="startGame()" id="startGame">Start Game</button>
 
-                <h2 id="announcement" class="text-uppercase"></h2>
+
+
             </div>
             <div class="col-md-12">
 

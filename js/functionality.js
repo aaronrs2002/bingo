@@ -7,6 +7,21 @@ let upToFour = 0;/*starting at zero. each letter from the word bingo is represen
 let calledListHTML = "";
 let announcement = "";
 
+/*DOES NOT RESET AT DEAL*/
+let playerMoney = 500;
+if (localStorage.getItem("balance") && Number(localStorage.getItem("balance"))) {
+    playerMoney = Number(localStorage.getItem("balance"));
+}
+document.querySelector("#playerMoney").innerHTML = playerMoney;
+let bet = 0;
+function setPlayerMoney(passPlayerMoney) {
+    playerMoney = passPlayerMoney;
+    document.getElementById("playerMoney").innerHTML = passPlayerMoney;
+    document.querySelector("#playerMoney").innerHTML = passPlayerMoney;/*SAFARI BUG NEEDS BOTH*/
+    localStorage.setItem("balance", passPlayerMoney);
+}
+
+
 
 function checkForBingo() {
 
@@ -53,18 +68,23 @@ function checkForBingo() {
                     switch (theColumID) {
                         case "b":
                             theB = theB + 1;
+                            console.log("added b: " + theB);
                             break;
                         case "i":
                             theI = theI + 1;
+                            console.log("added i: " + theI);
                             break;
                         case "n":
                             theN = theN + 1;
+                            console.log("added n: " + theN);
                             break;
                         case "g":
                             theG = theG + 1;
+                            console.log("added g: " + theG);
                             break;
                         case "o":
                             theO = theO + 1;
+                            console.log("added o: " + theO);
                             break;
                     }
 
@@ -73,13 +93,26 @@ function checkForBingo() {
                 let ckWinners = [theB, theI, theN, theG, theO, row2, row3, row4, row5, row6];
                 console.log("WINNING PLAYER: " + players[i] + " - ckWinners: " + ckWinners);
                 if (ckWinners.indexOf(5) !== -1) {
+
+
+
+
+
+
+
+
+
                     let message = "BINGO! " + players[i] + " is the WINNER!";
                     let alertLevel = "alert-danger";
                     if (players[i] === "player1") {
+                        playerMoney = (playerMoney + bet);
+
                         message = "BINGO! YOU FREAKIN WON!";
                         alertLevel = "alert-success";
+                    } else {
+                        playerMoney = (playerMoney - bet);
                     }
-
+                    setPlayerMoney(playerMoney);
                     document.getElementById("announcement").innerHTML = message;
                     globalAlert(alertLevel, message);
                     setTimeout(() => {
@@ -263,7 +296,9 @@ function runGame(target) {
 
 
 
-function startGame() {
+function startGame(playerBet) {
+    bet = playerBet;
+    document.getElementById("betTarget").innerHTML = "Bet: $" + bet;
     document.getElementById("calledList").innerHTML = "";
     document.getElementById("startGame").classList.add("hide");
     document.getElementById("callSquare").classList.remove("hide");
