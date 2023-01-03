@@ -1,6 +1,7 @@
 
 const columns = ["b", "i", "n", "g", "o"];
 const players = ["player1", "player2", "player3", "player4"];
+const diagonalWin = ["6b", "5i", "4n", "3g", "2o"];
 let youVerified = [];
 let calledPublically = [];
 let upToFour = 0;/*starting at zero. each letter from the word bingo is represented*/
@@ -93,7 +94,7 @@ function checkForBingo() {
                         console.log("player:" + players[i] + " - row3: " + row3);
                     }
                     if (j == 4) {
-                        row4 = row3 + 1;
+                        row4 = row4 + 1;
 
                         console.log("player:" + players[i] + " - row4: " + row4);
                     }
