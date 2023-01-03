@@ -26,20 +26,20 @@ function setPlayerMoney(passPlayerMoney) {
 function checkForBingo() {
 
     for (let i = 0; i < players.length; i++) {
-        let theB = 0;
-        let theI = 0;
-        let theN = 0;
-        let theG = 0;
-        let theO = 0;
-        let row2 = 0;
-        let row3 = 0;
-        let row4 = 0;
-        let row5 = 0;
-        let row6 = 0;
+        let theB = [];
+        let theI = [];
+        let theN = [];
+        let theG = [];
+        let theO = [];
+        let row2 = [];
+        let row3 = [];
+        let row4 = [];
+        let row5 = [];
+        let row6 = [];
 
         for (let j = 2; j < 7; j++) {
 
-            let ckReset = [theB, theI, theN, theG, theO, row2, row3, row4, row5, row6];
+            //  let ckReset = [theB.length, theI.length, theN.length, theG.length, theO.length, row2.length, row3.length, row4.length, row5.length, row6.length];
 
 
             if (document.querySelector("div#" + players[i] + "  .alert-success[data-rowid='" + j + "']") !== null) {
@@ -47,98 +47,123 @@ function checkForBingo() {
                 [].forEach.call(document.querySelectorAll("div#" + players[i] + " .alert-success[data-rowid='" + j + "']"), function (e) {
                     let theRowId = j;
                     let theColumID = document.querySelector("div#" + players[i] + "  .alert-success[data-rowid='" + j + "']").getAttribute("data-columnid");
-                    // console.log("Player: " + players[i] + " theColumID: " + theColumID + " - theRowId: " + j);
-                    switch (theRowId) {
-                        case 2:
-                            row2 = row2 + 1;
-                            break;
-                        case 3:
-                            row3 = row3 + 1;
-                            break;
-                        case 4:
-                            row4 = row4 + 1;
-                            break;
-                        case 5:
-                            row5 = row5 + 1;
-                            break;
-                        case 6:
-                            row6 = row6 + 1;
-                            break;
-                    }
+
+
                     switch (theColumID) {
                         case "b":
-                            theB = theB + 1;
-                            console.log("added b: " + theB);
+                            if (theB.indexOf(theColumID + theRowId) === -1) {
+                                theB.push(theColumID + theRowId);
+                            }
                             break;
                         case "i":
-                            theI = theI + 1;
-                            console.log("added i: " + theI);
+                            if (theI.indexOf(theColumID + theRowId) === -1) {
+                                theI.push(theColumID + theRowId);
+                            }
                             break;
                         case "n":
-                            theN = theN + 1;
-                            console.log("added n: " + theN);
+                            if (theN.indexOf(theColumID + theRowId) === -1) {
+                                theN.push(theColumID + theRowId);
+                            }
                             break;
                         case "g":
-                            theG = theG + 1;
-                            console.log("added g: " + theG);
+                            if (theG.indexOf(theColumID + theRowId) === -1) {
+                                theG.push(theColumID + theRowId);
+                            }
                             break;
                         case "o":
-                            theO = theO + 1;
-                            console.log("added o: " + theO);
+                            if (theO.indexOf(theColumID + theRowId) === -1) {
+                                theO.push(theColumID + theRowId);
+                            }
                             break;
                     }
+
+
+
+
+
+                    switch (theRowId) {
+                        case 2:
+                            if (row2.indexOf(theColumID + theRowId) === -1) {
+                                row2.push(theColumID + theRowId);
+                            }
+                            break;
+                        case 3:
+                            if (row3.indexOf(theColumID + theRowId) === -1) {
+                                row3.push(theColumID + theRowId);
+                            }
+                            break;
+                        case 4:
+                            if (row5.indexOf(theColumID + theRowId) === -1) {
+                                row5.push(theColumID + theRowId);
+                            }
+                            break;
+                        case 5:
+                            if (row5.indexOf(theColumID + theRowId) === -1) {
+                                row5.push(theColumID + theRowId);
+                            }
+                            break;
+                        case 6:
+                            if (row6.indexOf(theColumID + theRowId) === -1) {
+                                row6.push(theColumID + theRowId);
+                            }
+                            break;
+                    }
+
 
                 });
 
-                let ckWinners = [theB, theI, theN, theG, theO, row2, row3, row4, row5, row6];
-                console.log("WINNING PLAYER: " + players[i] + " - ckWinners: " + ckWinners);
-                if (ckWinners.indexOf(5) !== -1) {
-
-
-
-
-
-
-
-
-
-                    let message = "BINGO! " + players[i] + " is the WINNER!";
-                    let alertLevel = "alert-danger";
-                    if (players[i] === "player1") {
-                        playerMoney = (playerMoney + bet);
-
-                        message = "BINGO! YOU FREAKIN WON!";
-                        alertLevel = "alert-success";
-                    } else {
-                        playerMoney = (playerMoney - bet);
-                    }
-                    setPlayerMoney(playerMoney);
-                    document.getElementById("announcement").innerHTML = message;
-                    globalAlert(alertLevel, message);
-                    setTimeout(() => {
-                        document.getElementById("startGame").classList.remove("hide");
-                    }, 3000);
-
-                    document.getElementById("callSquare").classList.add("hide");
-                    document.getElementById(players[i]).classList.remove("alert-light");
-                    document.getElementById(players[i]).classList.add("alert-primary");
-                }
-
-
             }
-            theB = 0;
-            theI = 0;
-            theN = 0;
-            theG = 0;
-            theO = 0;
-            row2 = 0;
-            row3 = 0;
-            row4 = 0;
-            row5 = 0;
-            row6 = 0;
+
 
         }
 
+
+        console.log("[theB, theI, theN, theG, theO, row2, row3, row4, row5, row6];: " + [theB, theI, theN, theG, theO, row2, row3, row4, row5, row6]);
+        let ckWinners = [theB.length, theI.length, theN.length, theG.length, theO.length, row2.length, row3.length, row4.length, row5.length, row6.length];
+        console.log("WINNING PLAYER: " + players[i] + " - ckWinners: " + ckWinners);
+        if (ckWinners.indexOf(5) !== -1) {
+
+
+
+
+
+
+
+
+
+            let message = "BINGO! " + players[i] + " is the WINNER!";
+            let alertLevel = "alert-danger";
+            if (players[i] === "player1") {
+                playerMoney = (playerMoney + bet);
+
+                message = "BINGO! YOU FREAKIN WON!";
+                alertLevel = "alert-success";
+            } else {
+                playerMoney = (playerMoney - bet);
+            }
+            setPlayerMoney(playerMoney);
+            document.getElementById("announcement").innerHTML = message;
+            globalAlert(alertLevel, message);
+            setTimeout(() => {
+                document.getElementById("startGame").classList.remove("hide");
+            }, 3000);
+
+            document.getElementById("callSquare").classList.add("hide");
+            document.getElementById(players[i]).classList.remove("alert-light");
+            document.getElementById(players[i]).classList.add("alert-primary");
+        }
+
+
+        theB = [];
+        theI = [];
+        theN = [];
+        theG = [];
+        theO = [];
+        row2 = [];
+        row3 = [];
+        row4 = [];
+        row5 = [];
+        row6 = [];
     }
 
 
