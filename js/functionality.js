@@ -31,11 +31,11 @@ function checkForBingo() {
         let theN = [];
         let theG = [];
         let theO = [];
-        let row2 = [];
-        let row3 = [];
-        let row4 = [];
-        let row5 = [];
-        let row6 = [];
+        let row2 = 0;
+        let row3 = 0;
+        let row4 = 0;
+        let row5 = 0;
+        let row6 = 0;
 
         for (let j = 2; j < 7; j++) {
 
@@ -78,48 +78,43 @@ function checkForBingo() {
                     }
 
 
+                    console.log("what is \"J\"" + j);
 
 
+                    if (j == 2) {
+                        row2 = row2 + 1;
 
-                    switch (theRowId) {
-                        case 2:
-                            if (row2.indexOf(theColumID + theRowId) === -1) {
-                                row2.push(theColumID + theRowId);
-                            }
-                            break;
-                        case 3:
-                            if (row3.indexOf(theColumID + theRowId) === -1) {
-                                row3.push(theColumID + theRowId);
-                            }
-                            break;
-                        case 4:
-                            if (row5.indexOf(theColumID + theRowId) === -1) {
-                                row5.push(theColumID + theRowId);
-                            }
-                            break;
-                        case 5:
-                            if (row5.indexOf(theColumID + theRowId) === -1) {
-                                row5.push(theColumID + theRowId);
-                            }
-                            break;
-                        case 6:
-                            if (row6.indexOf(theColumID + theRowId) === -1) {
-                                row6.push(theColumID + theRowId);
-                            }
-                            break;
+                        console.log("player:" + players[i] + " - row2: " + row2);
                     }
 
+                    if (j == 3) {
+                        row3 = row3 + 1;
 
+                        console.log("player:" + players[i] + " - row3: " + row3);
+                    }
+                    if (j == 4) {
+                        row4 = row3 + 1;
+
+                        console.log("player:" + players[i] + " - row4: " + row4);
+                    }
+                    if (j == 5) {
+                        row5 = row5 + 1;
+
+                        console.log("player:" + players[i] + " - row5: " + row5);
+                    }
+                    if (j == 6) {
+                        row6 = row6 + 1;
+
+                        console.log("player:" + players[i] + " - row6: " + row6);
+                    }
                 });
-
-            }
-
-
+            };
         }
 
 
+
         console.log("[theB, theI, theN, theG, theO, row2, row3, row4, row5, row6];: " + [theB, theI, theN, theG, theO, row2, row3, row4, row5, row6]);
-        let ckWinners = [theB.length, theI.length, theN.length, theG.length, theO.length, row2.length, row3.length, row4.length, row5.length, row6.length];
+        let ckWinners = [theB.length, theI.length, theN.length, theG.length, theO.length, row2, row3, row4, row5, row6];
         console.log("WINNING PLAYER: " + players[i] + " - ckWinners: " + ckWinners);
         if (ckWinners.indexOf(5) !== -1) {
 
@@ -131,12 +126,12 @@ function checkForBingo() {
 
 
 
-            let message = "BINGO! " + players[i] + " is the WINNER!";
+            let message = "BINGO! " + players[i] + " is the WINNER! You lost $" + bet;
             let alertLevel = "alert-danger";
             if (players[i] === "player1") {
                 playerMoney = (playerMoney + bet);
 
-                message = "BINGO! YOU FREAKIN WON!";
+                message = "BINGO! YOU FREAKIN WON $" + bet + "!";
                 alertLevel = "alert-success";
             } else {
                 playerMoney = (playerMoney - bet);
