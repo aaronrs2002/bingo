@@ -244,6 +244,7 @@ function runGame(target) {
         cardHTML = cardHTML + "</ul>";
     }
     document.getElementById(target).innerHTML = cardHTML;
+    startCalling();
 }
 
 function startGame(playerBet) {
