@@ -45,7 +45,6 @@ let verifyTopRight = [];
 
 function checkForBingo() {
     for (let i = 0; i < players.length; i++) {
-        console.log("Start player: " + players[i]);
         for (let j = 2; j < 7; j++) {
             [].forEach.call(document.querySelectorAll("div#" + players[i] + " .alert-success[data-rowid='" + j + "']"), function (e) {
                 e.dataset.counted = "true";
@@ -60,32 +59,21 @@ function checkForBingo() {
                 if (diagonalWinTopRight.indexOf(squareVerified) !== -1 && verifyTopRight.indexOf(squareVerified) === -1) {
                     verifyTopRight.push(squareVerified);
                 }
-
                 switch (theColumID) {
                     case "b":
-
                         theB = theB + 1;
-
                         break;
                     case "i":
-
                         theI = theI + 1;
-
                         break;
                     case "n":
-
                         theN = theN + 1;
-
                         break;
                     case "g":
-
                         theG = theG + 1;
-
                         break;
                     case "o":
-
                         theO = theO + 1;
-
                         break;
                 }
                 if (j == 2) {
@@ -106,12 +94,9 @@ function checkForBingo() {
             });
         }
 
-
         let ckWinners = [theB, theI, theN, theG, theO, row2, row3, row4, row5, row6, verifyTopRight.length, verifyTopLeft.length];
 
-
-
-        /*TEMP MONITOR*/
+        /*TEMP MONITOR
 
         console.log("players[i]: " + players[i]);
 
@@ -120,7 +105,6 @@ function checkForBingo() {
                 for (let a = 0; a < player1.length; a++) {
                     if (player1[a] > ckWinners[a]) {
                         ckWinners[a] = player1[a];
-
                     } else {
                         player1[a] = ckWinners[a];
                     }
@@ -156,24 +140,27 @@ function checkForBingo() {
                 }
                 break;
         }
+*/
 
+        switch (players[i]) {
+
+            case "player1":
+                player1 = ckWinners;
+                break;
+            case "player2":
+                player2 = ckWinners;
+                break;
+            case "player3":
+                player3 = ckWinners;
+                break;
+            case "player4":
+                player4 = ckWinners;
+                break;
+        }
         console.log("player1: " + player1);
         console.log("player2: " + player2);
         console.log("player3: " + player3);
         console.log("player4: " + player4);
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         // console.log("PLAYER: " + players[i] + " - ckWinners: " + ckWinners);
@@ -181,7 +168,7 @@ function checkForBingo() {
         if (ckWinners.indexOf(5) !== -1) {
             let message = "BINGO! <i class='fas fa-user'></i> " + players[i] + " is the WINNER! You lost $" + bet + ".";
             let alertLevel = "alert-danger";
-            if (players[i] === "player1") {
+            if (player1.indexOf(5) !== -1) {
                 playerMoney = (playerMoney + bet);
 
                 message = "BINGO! YOU FREAKIN WON $" + bet + "!";
@@ -321,7 +308,7 @@ function runGame(target) {
         if (i === 0) {
             player = "You"
         }
-        document.querySelector("div[data-details='" + (i + 1) + "']").innerHTML = player + " <i class='fas fa-user'></i>";
+        document.querySelector("div[data-details='" + (i + 1) + "']").innerHTML = player + " <i class='fas fa-user py-3'></i>";
     }
 
 
@@ -387,6 +374,7 @@ function startGame(playerBet) {
     document.getElementById("calledList").innerHTML = "";
     document.getElementById("startGame").classList.add("hide");
     document.getElementById("callSquare").classList.remove("hide");
+    document.getElementById("selectedItem").innerHTML = "Select Square to begin."
     for (let i = 0; i < players.length; i++) {
         runGame(players[i]);
     }
