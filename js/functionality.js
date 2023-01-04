@@ -1,7 +1,9 @@
 
 const columns = ["b", "i", "n", "g", "o"];
 const players = ["player1", "player2", "player3", "player4"];
-const diagonalWin = ["6b", "5i", "4n", "3g", "2o"];
+let diagonalWinTopLeft = ["b2", "i3", "n4", "g5", "o6"];
+let diagonalWinTopRight = ["b6", "i5", "n4", "g3", "o2"];
+
 let youVerified = [];
 let calledPublically = [];
 let upToFour = 0;/*starting at zero. each letter from the word bingo is represented*/
@@ -22,112 +24,162 @@ function setPlayerMoney(passPlayerMoney) {
     localStorage.setItem("balance", passPlayerMoney);
 }
 
+let player1 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+let player2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+let player3 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+let player4 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
+let theB = 0;
+let theI = 0;
+let theN = 0;
+let theG = 0;
+let theO = 0;
+let row2 = 0;
+let row3 = 0;
+let row4 = 0;
+let row5 = 0;
+let row6 = 0;
+/*diagonal wins*/
+let verifyTopLeft = [];
+let verifyTopRight = [];
 
 function checkForBingo() {
-
     for (let i = 0; i < players.length; i++) {
-        let theB = [];
-        let theI = [];
-        let theN = [];
-        let theG = [];
-        let theO = [];
-        let row2 = 0;
-        let row3 = 0;
-        let row4 = 0;
-        let row5 = 0;
-        let row6 = 0;
-
+        console.log("Start player: " + players[i]);
         for (let j = 2; j < 7; j++) {
+            [].forEach.call(document.querySelectorAll("div#" + players[i] + " .alert-success[data-rowid='" + j + "']"), function (e) {
+                e.dataset.counted = "true";
+                let theRowId = j.toString();
+                let theColumID = e.dataset.columnid;
+                let squareVerified = (theColumID + theRowId);
+                /*start LEFT diagonal ck*/
+                if (diagonalWinTopLeft.indexOf(squareVerified) !== -1 && verifyTopLeft.indexOf(squareVerified) === -1) {
+                    verifyTopLeft.push(squareVerified);
+                }
+                /*start RIGHT diagonal ck*/
+                if (diagonalWinTopRight.indexOf(squareVerified) !== -1 && verifyTopRight.indexOf(squareVerified) === -1) {
+                    verifyTopRight.push(squareVerified);
+                }
 
-            //  let ckReset = [theB.length, theI.length, theN.length, theG.length, theO.length, row2.length, row3.length, row4.length, row5.length, row6.length];
+                switch (theColumID) {
+                    case "b":
 
+                        theB = theB + 1;
 
-            if (document.querySelector("div#" + players[i] + "  .alert-success[data-rowid='" + j + "']") !== null) {
+                        break;
+                    case "i":
 
-                [].forEach.call(document.querySelectorAll("div#" + players[i] + " .alert-success[data-rowid='" + j + "']"), function (e) {
-                    let theRowId = j;
-                    let theColumID = document.querySelector("div#" + players[i] + "  .alert-success[data-rowid='" + j + "']").getAttribute("data-columnid");
+                        theI = theI + 1;
 
+                        break;
+                    case "n":
 
-                    switch (theColumID) {
-                        case "b":
-                            if (theB.indexOf(theColumID + theRowId) === -1) {
-                                theB.push(theColumID + theRowId);
-                            }
-                            break;
-                        case "i":
-                            if (theI.indexOf(theColumID + theRowId) === -1) {
-                                theI.push(theColumID + theRowId);
-                            }
-                            break;
-                        case "n":
-                            if (theN.indexOf(theColumID + theRowId) === -1) {
-                                theN.push(theColumID + theRowId);
-                            }
-                            break;
-                        case "g":
-                            if (theG.indexOf(theColumID + theRowId) === -1) {
-                                theG.push(theColumID + theRowId);
-                            }
-                            break;
-                        case "o":
-                            if (theO.indexOf(theColumID + theRowId) === -1) {
-                                theO.push(theColumID + theRowId);
-                            }
-                            break;
-                    }
+                        theN = theN + 1;
 
+                        break;
+                    case "g":
 
-                    console.log("what is \"J\"" + j);
+                        theG = theG + 1;
 
+                        break;
+                    case "o":
 
-                    if (j == 2) {
-                        row2 = row2 + 1;
+                        theO = theO + 1;
 
-                        console.log("player:" + players[i] + " - row2: " + row2);
-                    }
-
-                    if (j == 3) {
-                        row3 = row3 + 1;
-
-                        console.log("player:" + players[i] + " - row3: " + row3);
-                    }
-                    if (j == 4) {
-                        row4 = row4 + 1;
-
-                        console.log("player:" + players[i] + " - row4: " + row4);
-                    }
-                    if (j == 5) {
-                        row5 = row5 + 1;
-
-                        console.log("player:" + players[i] + " - row5: " + row5);
-                    }
-                    if (j == 6) {
-                        row6 = row6 + 1;
-
-                        console.log("player:" + players[i] + " - row6: " + row6);
-                    }
-                });
-            };
+                        break;
+                }
+                if (j == 2) {
+                    row2 = row2 + 1;
+                }
+                if (j == 3) {
+                    row3 = row3 + 1;
+                }
+                if (j == 4) {
+                    row4 = row4 + 1;
+                }
+                if (j == 5) {
+                    row5 = row5 + 1;
+                }
+                if (j == 6) {
+                    row6 = row6 + 1;
+                }
+            });
         }
 
 
+        let ckWinners = [theB, theI, theN, theG, theO, row2, row3, row4, row5, row6, verifyTopRight.length, verifyTopLeft.length];
 
-        console.log("[theB, theI, theN, theG, theO, row2, row3, row4, row5, row6];: " + [theB, theI, theN, theG, theO, row2, row3, row4, row5, row6]);
-        let ckWinners = [theB.length, theI.length, theN.length, theG.length, theO.length, row2, row3, row4, row5, row6];
-        console.log("WINNING PLAYER: " + players[i] + " - ckWinners: " + ckWinners);
+
+
+        /*TEMP MONITOR*/
+
+        console.log("players[i]: " + players[i]);
+
+        switch (players[i]) {
+            case 'player1':
+                for (let a = 0; a < player1.length; a++) {
+                    if (player1[a] > ckWinners[a]) {
+                        ckWinners[a] = player1[a];
+
+                    } else {
+                        player1[a] = ckWinners[a];
+                    }
+                }
+                break;
+            case 'player2':
+                for (let a = 0; a < player2.length; a++) {
+                    if (player2[a] > ckWinners[a]) {
+                        ckWinners[a] = player2[a];
+                        console.log("had to update ckWinners[a]: " + ckWinners[a] + " - player2[a]: " + player2[a]);
+                    } else {
+                        player2[a] = ckWinners[a];
+                        console.log("player 2 was bigger");
+                    }
+                }
+                break;
+            case 'player3':
+                for (let a = 0; a < player3.length; a++) {
+                    if (player3[a] > ckWinners[a]) {
+                        ckWinners[a] = player3[a];
+                    } else {
+                        player3[a] = ckWinners[a];
+                    }
+                }
+                break;
+            case 'player4':
+                for (let a = 0; a < player4.length; a++) {
+                    if (player4[a] > ckWinners[a]) {
+                        ckWinners[a] = player4[a];
+                    } else {
+                        player4[a] = ckWinners[a];
+                    }
+                }
+                break;
+        }
+
+        console.log("player1: " + player1);
+        console.log("player2: " + player2);
+        console.log("player3: " + player3);
+        console.log("player4: " + player4);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // console.log("PLAYER: " + players[i] + " - ckWinners: " + ckWinners);
+
         if (ckWinners.indexOf(5) !== -1) {
-
-
-
-
-
-
-
-
-
-            let message = "BINGO! " + players[i] + " is the WINNER! You lost $" + bet;
+            let message = "BINGO! <i class='fas fa-user'></i> " + players[i] + " is the WINNER! You lost $" + bet + ".";
             let alertLevel = "alert-danger";
             if (players[i] === "player1") {
                 playerMoney = (playerMoney + bet);
@@ -147,21 +199,27 @@ function checkForBingo() {
             document.getElementById("callSquare").classList.add("hide");
             document.getElementById(players[i]).classList.remove("alert-light");
             document.getElementById(players[i]).classList.add("alert-primary");
+
         }
 
+        theB = 0;
+        theI = 0;
+        theN = 0;
+        theG = 0;
+        theO = 0;
+        row2 = 0;
+        row3 = 0;
+        row4 = 0;
+        row5 = 0;
+        row6 = 0;
 
-        theB = [];
-        theI = [];
-        theN = [];
-        theG = [];
-        theO = [];
-        row2 = [];
-        row3 = [];
-        row4 = [];
-        row5 = [];
-        row6 = [];
+        /*diagonal wins*/
+        verifyTopLeft = [];
+        verifyTopRight = [];
+
+
+
     }
-
 
 
 }
@@ -201,7 +259,7 @@ function startCalling() {
         theNumber = theNumber.toString();
         let offering = (columns[upToFour] + theNumber).toString();
         if (calledPublically.indexOf(offering) === -1) {
-            document.getElementById("selectedItem").innerHTML = columns[upToFour] + "-" + theNumber;
+            document.getElementById("selectedItem").innerHTML = "Calling: " + columns[upToFour] + "-" + theNumber;
             [].forEach.call(document.querySelectorAll("[data-value='" + offering + "']"), function (e) {
                 e.classList.add("alert-success");
             });
@@ -221,6 +279,8 @@ function startCalling() {
 
 
     checkForBingo();
+
+
 
 
     return false;
@@ -244,6 +304,10 @@ function verifysquare(squareInfo) {
 
 
 function runGame(target) {
+    player1 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    player2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    player3 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    player4 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     youVerified = [];
     calledPublically = [];
     upToFour = 0;
@@ -257,7 +321,7 @@ function runGame(target) {
         if (i === 0) {
             player = "You"
         }
-        document.querySelector("label[data-details='" + (i + 1) + "']").innerHTML = player + " <i class='fas fa-user'></i>";
+        document.querySelector("div[data-details='" + (i + 1) + "']").innerHTML = player + " <i class='fas fa-user'></i>";
     }
 
 
@@ -298,9 +362,9 @@ function runGame(target) {
                         clickFunc = ` onClick="javascript:verifysquare('${columns[j] + theNumber}')" `;
                     }
                     if (columns[j] === "n" && usedNumbers.length === 4) {
-                        cardHTML = cardHTML + "<li data-value='FREE' data-rowid='" + usedNumbers.length + "' data-columnid='" + columns[j] + "'  class='text-center alert-success'>FREE</li>";
+                        cardHTML = cardHTML + "<li data-player='" + target + "' data-value='FREE' data-rowid='" + usedNumbers.length + "' data-columnid='" + columns[j] + "'  class='text-center alert-success' >FREE</li>";
                     } else {
-                        cardHTML = cardHTML + "<li data-value='" + columns[j] + theNumber + "' data-rowid='" + usedNumbers.length + "' data-columnid='" + columns[j] + "' " + clickFunc + " class='text-center'>" + theNumber + "</li>";
+                        cardHTML = cardHTML + "<li data-player='" + target + "'  data-value='" + columns[j] + theNumber + "' data-rowid='" + usedNumbers.length + "' data-columnid='" + columns[j] + "' " + clickFunc + " class='text-center'>" + theNumber + "</li>";
                     }
                 }
             }
