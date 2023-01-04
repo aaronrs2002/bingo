@@ -96,7 +96,6 @@ function checkForBingo() {
                 player4 = ckWinners;
                 break;
         }
-
         if (ckWinners.indexOf(5) !== -1) {
             let message = "BINGO! <i class='fas fa-user'></i> " + players[i] + " is the WINNER! You lost $" + bet + ".";
             let alertLevel = "alert-danger";
@@ -115,11 +114,9 @@ function checkForBingo() {
             if (calledPublically.length > 5) {
                 globalAlert(alertLevel, message);
             }
-
             setTimeout(() => {
                 document.getElementById("startGame").classList.remove("hide");
             }, 3000);
-
             document.getElementById("callSquare").classList.add("hide");
             document.getElementById(players[i]).classList.remove("alert-light");
             document.getElementById(players[i]).classList.add("alert-primary");
@@ -154,19 +151,15 @@ function startCalling() {
         let offering = (columns[upToFour] + theNumber).toString();
         if (calledPublically.indexOf(offering) === -1) {
             document.getElementById("selectedItem").innerHTML = "Calling: " + columns[upToFour] + "-" + theNumber;
-
             let whereToStart = 0;
             if (runAuto === false) {
                 whereToStart = 1;
             }
-
             for (let i = whereToStart; i < players.length; i++) {
                 [].forEach.call(document.querySelectorAll("div#" + players[i] + " [data-value='" + offering + "']"), function (e) {
                     e.classList.add("alert-success");
                 });
-
             }
-
             calledPublically.push(offering);
             calledListHTML = calledListHTML + "<span class='badge bg-warning text-dark mx-1 text-capitalize'>" + offering + "</span>";
             document.getElementById("calledList").innerHTML = calledListHTML;
@@ -214,7 +207,6 @@ function runGame(target) {
         if (i === 0) { player = "You" }
         document.querySelector("div[data-details='" + (i + 1) + "']").innerHTML = player + " <i class='fas fa-user py-3'></i>";
     }
-
     for (let j = 0; j < columns.length; j++) {
         let b = 15;
         let a = 1;
@@ -222,7 +214,6 @@ function runGame(target) {
         if (j === 2) { b = 45; a = 31; }
         if (j === 3) { b = 60; a = 46; }
         if (j === 4) { b = 75; a = 61; }
-
         cardHTML = cardHTML + "<ul class='list-unstyled inlineColumns'>";
         let usedNumbers = [];
         while (usedNumbers.length < 6) {
@@ -255,14 +246,11 @@ function startGame(playerBet) {
     player2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     player3 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     player4 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-
     if (document.querySelector(".alert-success[data-rowid]") !== null) {
         [].forEach.call(document.querySelectorAll(".alert-success[data-rowid]"), function (e) {
             e.classList.remove("alert-success");
         });
     }
-
-
     bet = playerBet;
     document.getElementById("betTarget").innerHTML = "Bet: $" + bet;
     document.getElementById("calledList").innerHTML = "";
