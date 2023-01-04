@@ -197,10 +197,6 @@ function verifysquare(squareInfo) {
 }
 
 function runGame(target) {
-    player1 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    player2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    player3 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    player4 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     youVerified = [];
     calledPublically = [];
     upToFour = 0;
@@ -251,6 +247,18 @@ function runGame(target) {
 }
 
 function startGame(playerBet) {
+    player1 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    player2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    player3 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    player4 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+    if (document.querySelector(".alert-success[data-rowid]") !== null) {
+        [].forEach.call(document.querySelectorAll(".alert-success[data-rowid]"), function (e) {
+            e.classList.remove("alert-success");
+        });
+    }
+
+
     bet = playerBet;
     document.getElementById("betTarget").innerHTML = "Bet: $" + bet;
     document.getElementById("calledList").innerHTML = "";
