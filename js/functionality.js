@@ -112,7 +112,10 @@ function checkForBingo() {
             document.getElementById("announcement").innerHTML = message;
             document.getElementById("selectedItem").innerHTML = "Place your bet.";
             document.getElementById("betTarget").innerHTML = "";
-            globalAlert(alertLevel, message);
+            if (calledPublically.length > 5) {
+                globalAlert(alertLevel, message);
+            }
+
             setTimeout(() => {
                 document.getElementById("startGame").classList.remove("hide");
             }, 3000);
