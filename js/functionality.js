@@ -182,7 +182,11 @@ function startCalling() {
 }
 
 function verifysquare(squareInfo) {
-    console.log("verify: " + squareInfo);
+    const ckForWinner = [...player1, ...player2, ...player3, ...player4];
+    if (ckForWinner.indexOf(5) !== -1) {
+        globalAlert("alert-danger", "Somebody already won. Place your bet up top.");
+        return false;
+    }
     if (calledPublically.indexOf(squareInfo) !== -1) {
         document.querySelector("li[data-value='" + squareInfo + "']").classList.add("alert-success");
         youVerified.push(squareInfo);
