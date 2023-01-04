@@ -8,7 +8,7 @@ let calledPublically = [];
 let upToFour = 0;/*starting at zero. each letter from the word bingo is represented*/
 let calledListHTML = "";
 let announcement = "";
-let runAuto = true;
+let runAuto = false;
 /*DOES NOT RESET AT DEAL*/
 let playerMoney = 500;
 if (localStorage.getItem("balance") && Number(localStorage.getItem("balance"))) {
@@ -151,9 +151,19 @@ function startCalling() {
         let offering = (columns[upToFour] + theNumber).toString();
         if (calledPublically.indexOf(offering) === -1) {
             document.getElementById("selectedItem").innerHTML = "Calling: " + columns[upToFour] + "-" + theNumber;
-            [].forEach.call(document.querySelectorAll("[data-value='" + offering + "']"), function (e) {
-                e.classList.add("alert-success");
-            });
+
+            let whereToStart = 0;
+            if (runAuto === false) {
+                whereToStart = 1;
+            }
+
+            for (let i = whereToStart; i < players.length; i++) {
+                [].forEach.call(document.querySelectorAll("div#" + players[i] + " [data-value='" + offering + "']"), function (e) {
+                    e.classList.add("alert-success");
+                });
+
+            }
+
             calledPublically.push(offering);
             calledListHTML = calledListHTML + "<span class='badge bg-warning text-dark mx-1 text-capitalize'>" + offering + "</span>";
             document.getElementById("calledList").innerHTML = calledListHTML;
@@ -170,15 +180,17 @@ function startCalling() {
 
 function verifysquare(squareInfo) {
     console.log("verify: " + squareInfo);
-    if (youVerified.indexOf(squareInfo) !== -1) {
+    if (calledPublically.indexOf(squareInfo) !== -1) {
         document.querySelector("li[data-value='" + squareInfo + "']").classList.add("alert-success");
         youVerified.push(squareInfo);
+        checkForBingo();
     } else {
         document.querySelector("li[data-value='" + squareInfo + "']").classList.add("alert-danger");
         setTimeout(() => {
             document.querySelector("li[data-value='" + squareInfo + "']").classList.remove("alert-danger");
         }, 3000)
     }
+    startCalling();
 }
 
 function runGame(target) {

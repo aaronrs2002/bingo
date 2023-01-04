@@ -17,7 +17,7 @@
 
     <link rel="stylesheet" href="https://aaronrs2002.github.io/black-jack/css/animate.min.css" />
     <link href="https://aaronrs2002.github.io/black-jack/css/shared.css" rel="stylesheet">
-    <link href="https://aaronrs2002.github.io/black-jack/css/style.css" rel="stylesheet">
+
     <link href="css/style.css" rel="stylesheet">
 
     <title>Bingo</title>
@@ -66,7 +66,7 @@
 
 
             <div class="d-grid gap-2 col-12 mx-auto px-0">
-                <button class="btn btn-primary  px-0 hide" onClick="startCalling()" id="callSquare">Select
+                <button class="btn btn-primary  px-0 hide" onClick="startCalling()" id="callSquare">Select Next
                     Square</button>
 
 
@@ -98,6 +98,34 @@
                 <div class="alert-light d-flex justify-content-center" id="player4">
                 </div>
                 <div class="text-center text-light alert-dark" data-details="4"></div>
+            </div>
+
+            <div class="col-md-12 py-1">
+
+                <div class="d-grid gap-2">
+                    <button class="btn btn-info" onClick="javascript:toggle('rules')" type="button"
+                        data-toggle="default">View Rules</button>
+                    <button class="btn btn-info hide" onClick="javascript:toggle('default')" type="button"
+                        data-toggle="rules">Hide Rules</button>
+                </div>
+
+                <div class="card hide" data-toggle="rules">
+                    <div class="card-body">
+                        <h5 class="card-title">Bingo rules:</h5>
+                        <p>Players can win by covering a complete horizontal, vertical or diagonal line. Pattern bingo
+                            is often played in 75-ball games.
+                            A pattern or shape will be declared at the start of the game and players are aiming to cover
+                            their numbers to make this pattern on the card.</p>
+                        <p>To start select the amount you are willing to bet from the top. Select "Next Square" to
+                            start.
+                            While the other players automatically fill in the square their card has, you need to locate
+                            the square called on your card. If you do not have this square,
+                            select "next square" to move to the next one.</p>
+
+
+
+                    </div>
+                </div>
             </div>
 
         </div>

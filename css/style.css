@@ -14,3 +14,8 @@ ul.list-unstyled.inline li:hover {
     min-height: 55px;
     overflow-y: auto;
 }
+
+#player1 [data-rowid]:hover {
+    cursor: pointer;
+    background-color: #999;
+}
