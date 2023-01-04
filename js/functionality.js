@@ -8,6 +8,7 @@ let calledPublically = [];
 let upToFour = 0;/*starting at zero. each letter from the word bingo is represented*/
 let calledListHTML = "";
 let announcement = "";
+let runAuto = true;
 /*DOES NOT RESET AT DEAL*/
 let playerMoney = 500;
 if (localStorage.getItem("balance") && Number(localStorage.getItem("balance"))) {
