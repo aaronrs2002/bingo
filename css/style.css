@@ -19,3 +19,11 @@ ul.list-unstyled.inline li:hover {
     cursor: pointer;
     background-color: #999;
 }
+
+@media (max-width: 768px) {
+    li {
+        font-size: 1.2rem;
+    }
+}
+
+/*end 768*/

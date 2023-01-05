@@ -221,7 +221,7 @@ function runGame(target) {
             if (usedNumbers.indexOf(theNumber) === -1) {
                 usedNumbers.push(theNumber);
                 if (usedNumbers.length === 1) {
-                    cardHTML = cardHTML + "<li><h3  class='text-capitalize text-center pt-2'>" + columns[j] + "</h3></li>";
+                    cardHTML = cardHTML + "<li><h2  class='text-capitalize text-center pt-2'>" + columns[j] + "</h2></li>";
                 } else {
                     let clickFunc = "";
                     if (target === "player1") {
@@ -257,6 +257,7 @@ function startGame(playerBet) {
     document.getElementById("startGame").classList.add("hide");
     document.getElementById("callSquare").classList.remove("hide");
     document.getElementById("selectedItem").innerHTML = "Select Square to begin.";
+
     for (let i = 0; i < players.length; i++) {
         runGame(players[i]);
     }
