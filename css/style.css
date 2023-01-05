@@ -11,6 +11,7 @@ ul.list-unstyled.inline li:hover {
 }
 
 #calledList {
+    padding: 5px 0px;
     min-height: 55px;
     overflow-y: auto;
 }
@@ -20,6 +21,14 @@ ul.list-unstyled.inline li:hover {
     background-color: #999;
 }
 
+.calledList span.badge {
+
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+
+/*Start mobile*/
 @media (max-width: 768px) {
     li {
         font-size: 1.2rem;
