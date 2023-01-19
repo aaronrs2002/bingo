@@ -16,11 +16,19 @@ if (localStorage.getItem("balance") && Number(localStorage.getItem("balance"))) 
 }
 document.querySelector("#playerMoney").innerHTML = playerMoney;
 let bet = 0;
-function setPlayerMoney(passPlayerMoney) {
-    playerMoney = passPlayerMoney;
-    document.getElementById("playerMoney").innerHTML = passPlayerMoney;
-    document.querySelector("#playerMoney").innerHTML = passPlayerMoney;/*SAFARI BUG NEEDS BOTH*/
-    localStorage.setItem("balance", passPlayerMoney);
+function setPlayerMoney(passPlayerMoney, status) {
+
+    if (status === "won") {
+        playerMoney = passPlayerMoney + bet;
+        console.log("you won " + bet + " balance: " + playerMoney);
+    } else {
+        playerMoney = passPlayerMoney - bet;
+        console.log("you won " + bet + " balance: " + playerMoney);
+    }
+    document.getElementById("playerMoney").innerHTML = playerMoney;
+    document.querySelector("#playerMoney").innerHTML = playerMoney;/*SAFARI BUG NEEDS BOTH*/
+    localStorage.setItem("balance", playerMoney);
+    return false;
 }
 
 let player1 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -100,14 +108,14 @@ function checkForBingo() {
             let message = "BINGO! <i class='fas fa-user'></i> " + players[i] + " is the WINNER! You lost $" + bet + ".";
             let alertLevel = "alert-danger";
             if (player1.indexOf(5) !== -1) {
-                playerMoney = (playerMoney + bet);
+                setPlayerMoney(playerMoney, "won");
+
 
                 message = "BINGO! YOU FREAKIN WON $" + bet + "!";
                 alertLevel = "alert-success";
             } else {
-                playerMoney = (playerMoney - bet);
+                setPlayerMoney(playerMoney, "lost");
             }
-            setPlayerMoney(playerMoney);
             document.getElementById("announcement").innerHTML = message;
             document.getElementById("selectedItem").innerHTML = "Place your bet.";
             document.getElementById("betTarget").innerHTML = "";
@@ -134,6 +142,7 @@ function checkForBingo() {
         verifyTopLeft = [];
         verifyTopRight = [];
     }
+    return false;
 }
 
 function startCalling() {
