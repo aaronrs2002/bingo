@@ -20,10 +20,8 @@ function setPlayerMoney(passPlayerMoney, status) {
 
     if (status === "won") {
         playerMoney = passPlayerMoney + bet;
-        console.log("you won " + bet + " balance: " + playerMoney);
     } else {
         playerMoney = passPlayerMoney - bet;
-        console.log("you won " + bet + " balance: " + playerMoney);
     }
     document.getElementById("playerMoney").innerHTML = playerMoney;
     document.querySelector("#playerMoney").innerHTML = playerMoney;/*SAFARI BUG NEEDS BOTH*/
