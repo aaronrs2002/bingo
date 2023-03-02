@@ -107,7 +107,7 @@ function checkForBingo() {
             let alertLevel = "alert-danger";
             if (player1.indexOf(5) !== -1) {
                 setPlayerMoney(playerMoney, "won");
-                message = "BINGO! YOU FREAKIN WON THE $" + (bet * 4) + " POT!";
+                message = "BINGO! YOU WON THE $" + (bet * 4) + " POT!";
                 alertLevel = "alert-success";
             } else {
                 setPlayerMoney(playerMoney, "lost");
