@@ -19,7 +19,7 @@ let bet = 0;
 function setPlayerMoney(passPlayerMoney, status) {
 
     if (status === "won") {
-        playerMoney = passPlayerMoney + bet;
+        playerMoney = passPlayerMoney + (bet * 4);
     } else {
         playerMoney = passPlayerMoney - bet;
     }
@@ -107,9 +107,7 @@ function checkForBingo() {
             let alertLevel = "alert-danger";
             if (player1.indexOf(5) !== -1) {
                 setPlayerMoney(playerMoney, "won");
-
-
-                message = "BINGO! YOU FREAKIN WON $" + bet + "!";
+                message = "BINGO! YOU FREAKIN WON THE $" + (bet * 4) + " POT!";
                 alertLevel = "alert-success";
             } else {
                 setPlayerMoney(playerMoney, "lost");
