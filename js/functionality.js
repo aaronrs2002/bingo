@@ -17,9 +17,8 @@ if (localStorage.getItem("balance") && Number(localStorage.getItem("balance"))) 
 document.querySelector("#playerMoney").innerHTML = playerMoney;
 let bet = 0;
 function setPlayerMoney(passPlayerMoney, status) {
-
     if (status === "won") {
-        playerMoney = passPlayerMoney + (bet * 4);
+        playerMoney = (passPlayerMoney + (bet * 4));
     } else {
         playerMoney = passPlayerMoney - bet;
     }
