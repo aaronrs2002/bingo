@@ -105,8 +105,9 @@ function checkForBingo() {
             let message = "BINGO! <i class='fas fa-user'></i> " + players[i] + " is the WINNER! You lost $" + bet + ".";
             let alertLevel = "alert-danger";
             if (player1.indexOf(5) !== -1) {
-                setPlayerMoney(playerMoney, "won");
                 message = "BINGO! YOU WON THE $" + (bet * 4) + " POT!";
+                setPlayerMoney(playerMoney, "won");
+
                 alertLevel = "alert-success";
             } else {
                 setPlayerMoney(playerMoney, "lost");
