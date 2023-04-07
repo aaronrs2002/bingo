@@ -20,7 +20,6 @@ let bet = 0;
 function setPlayerMoney(passPlayerMoney, status) {
     if (gameOver === false) {
         if (status === "won") {
-            console.log("playerMoney: " + playerMoney);
             playerMoney = (passPlayerMoney + (bet * 4));
             gameOver = true;
         } else {
