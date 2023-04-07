@@ -10,6 +10,7 @@ let calledListHTML = "";
 let announcement = "";
 let runAuto = false;
 /*DOES NOT RESET AT DEAL*/
+let gameOver = false;
 let playerMoney = 500;
 if (localStorage.getItem("balance") && Number(localStorage.getItem("balance"))) {
     playerMoney = Number(localStorage.getItem("balance"));
@@ -17,15 +18,22 @@ if (localStorage.getItem("balance") && Number(localStorage.getItem("balance"))) 
 document.querySelector("#playerMoney").innerHTML = playerMoney;
 let bet = 0;
 function setPlayerMoney(passPlayerMoney, status) {
-    if (status === "won") {
-        playerMoney = (passPlayerMoney + (bet * 4));
+    if (gameOver === false) {
+        if (status === "won") {
+            console.log("playerMoney: " + playerMoney);
+            playerMoney = (passPlayerMoney + (bet * 4));
+            gameOver = true;
+        } else {
+            playerMoney = passPlayerMoney - bet;
+            gameOver = true;
+        }
+        document.getElementById("playerMoney").innerHTML = playerMoney;
+        document.querySelector("#playerMoney").innerHTML = playerMoney;/*SAFARI BUG NEEDS BOTH*/
+        localStorage.setItem("balance", playerMoney);
+        return false;
     } else {
-        playerMoney = passPlayerMoney - bet;
+        return false;
     }
-    document.getElementById("playerMoney").innerHTML = playerMoney;
-    document.querySelector("#playerMoney").innerHTML = playerMoney;/*SAFARI BUG NEEDS BOTH*/
-    localStorage.setItem("balance", playerMoney);
-    return false;
 }
 
 let player1 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -247,6 +255,7 @@ function runGame(target) {
 }
 
 function startGame(playerBet) {
+    gameOver = false;
     player1 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     player2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     player3 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
