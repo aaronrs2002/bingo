@@ -149,7 +149,6 @@ function checkForBingo() {
 }
 
 function startCalling() {
-
     document.getElementById("callSquare").disabled = true;
     const targetLength = calledPublically.length + 1;
     let b = 15;
@@ -173,17 +172,13 @@ function startCalling() {
                     e.classList.add("alert-success");
                 });
             }
-            // console.log("calledPublically: " + calledPublically + " - offering: " + offering);
-            let pushedOne = false;
-            if (pushedOne === false) {
-                calledPublically.push(offering);
-                pushedOne = true;
-            }
-
-            calledListHTML = calledListHTML + "<span class='badge bg-warning text-dark mx-1 text-capitalize'>" + offering + "</span>";
-            document.getElementById("calledList").innerHTML = calledListHTML;
+            calledPublically.push(offering);
         }
+
+        calledListHTML = calledListHTML + "<span class='badge bg-warning text-dark mx-1 text-capitalize'>" + offering + "</span>";
+        document.getElementById("calledList").innerHTML = calledListHTML;
     }
+
     upToFour = upToFour + 1;
     if (upToFour >= 5) {
         upToFour = 0;
@@ -258,10 +253,14 @@ function runGame(target) {
         cardHTML = cardHTML + "</ul>";
     }
     document.getElementById(target).innerHTML = cardHTML;
-    startCalling();
+    if (target === "player4") {
+        startCalling();
+    }
+
 }
 
 function startGame(playerBet) {
+    console.log("START Game");
     gameOver = false;
     player1 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     player2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
