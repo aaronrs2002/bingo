@@ -149,6 +149,7 @@ function checkForBingo() {
 }
 
 function startCalling() {
+
     document.getElementById("callSquare").disabled = true;
     const targetLength = calledPublically.length + 1;
     let b = 15;
@@ -172,7 +173,13 @@ function startCalling() {
                     e.classList.add("alert-success");
                 });
             }
-            calledPublically.push(offering);
+            // console.log("calledPublically: " + calledPublically + " - offering: " + offering);
+            let pushedOne = false;
+            if (pushedOne === false) {
+                calledPublically.push(offering);
+                pushedOne = true;
+            }
+
             calledListHTML = calledListHTML + "<span class='badge bg-warning text-dark mx-1 text-capitalize'>" + offering + "</span>";
             document.getElementById("calledList").innerHTML = calledListHTML;
         }
@@ -183,6 +190,7 @@ function startCalling() {
     }
     document.getElementById("callSquare").disabled = false;
     checkForBingo();
+
     return false;
 }
 
