@@ -172,11 +172,17 @@ function startCalling() {
                     e.classList.add("alert-success");
                 });
             }
-            calledPublically.push(offering);
+            if (calledPublically.indexOf(offering) === -1) {
+                calledPublically.push(offering);
+                calledListHTML = calledListHTML + "<span class='badge bg-warning text-dark mx-1 text-capitalize'>" + offering + "</span>";
+                document.getElementById("calledList").innerHTML = calledListHTML;
+            } else {
+                return false;
+            }
+
         }
 
-        calledListHTML = calledListHTML + "<span class='badge bg-warning text-dark mx-1 text-capitalize'>" + offering + "</span>";
-        document.getElementById("calledList").innerHTML = calledListHTML;
+
     }
 
     upToFour = upToFour + 1;
