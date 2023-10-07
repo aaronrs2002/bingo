@@ -14,10 +14,11 @@ ul.list-unstyled.inline li:hover {
     padding: 5px 0px;
     min-height: 55px;
     overflow-y: auto;
+    font-size: 1.5rem !important;
 }
 
 #calledList .badge {
-    text-shadow: 1px 1px 1px #333;
+    text-shadow: 2px 2px 2px #333;
 }
 
 #player1 [data-rowid]:hover {
