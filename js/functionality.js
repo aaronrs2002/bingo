@@ -174,7 +174,7 @@ function startCalling() {
             }
             if (calledPublically.indexOf(offering) === -1) {
                 calledPublically.push(offering);
-                calledListHTML = calledListHTML + "<span class='badge bg-warning text-dark mx-1 text-capitalize'>" + offering + "</span>";
+                calledListHTML = calledListHTML + "<span class='badge bg-warning text-light mx-1 text-capitalize'>" + offering + "</span>";
                 document.getElementById("calledList").innerHTML = calledListHTML;
             } else {
                 return false;
