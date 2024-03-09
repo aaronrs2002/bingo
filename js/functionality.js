@@ -178,14 +178,18 @@ function startCalling(option) {
         if (calledPublically.indexOf(offering) === -1) {
             document.getElementById("selectedItem").innerHTML = "Calling: " + columns[upToFour] + "-" + theNumber;
             let whereToStart = 0;
+
             if (runAuto === false) {
                 whereToStart = 1;
             }
-            for (let i = whereToStart; i < players.length; i++) {
-                [].forEach.call(document.querySelectorAll("div#" + players[i] + " [data-value='" + offering + "']"), function (e) {
-                    e.classList.add("alert-success");
-                });
-            }
+            setTimeout(() => {/*give the user 2 second to beat the computer*/
+                for (let i = whereToStart; i < players.length; i++) {
+                    [].forEach.call(document.querySelectorAll("div#" + players[i] + " [data-value='" + offering + "']"), function (e) {
+                        e.classList.add("alert-success");
+                    });
+                }
+            }, 2000);
+
             if (calledPublically.indexOf(offering) === -1) {
                 calledPublically.push(offering);
                 calledListHTML = calledListHTML + "<span class='badge bg-warning text-light mx-1 text-capitalize'>" + offering + "</span>";
