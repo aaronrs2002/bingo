@@ -3,6 +3,7 @@ const columns = ["b", "i", "n", "g", "o"];
 const players = ["player1", "player2", "player3", "player4"];
 let diagonalWinTopLeft = ["b2", "i3", "n4", "g5", "o6"];
 let diagonalWinTopRight = ["b6", "i5", "n4", "g3", "o2"];
+let theInterval = null;
 let youVerified = [];
 let calledPublically = [];
 let upToFour = 0;/*starting at zero. each letter from the word bingo is represented*/
@@ -109,6 +110,15 @@ function checkForBingo() {
                 break;
         }
         if (ckWinners.indexOf(5) !== -1) {
+            if (theInterval !== null) {
+
+                toggleTimer();
+                setTimeout(() => {
+                    localStorage.setItem("bingoTimer", "on");
+                }, 50);
+
+            }
+
             let message = "BINGO! <i class='fas fa-user'></i> " + players[i] + " is the WINNER! You lost $" + bet + ".";
             let alertLevel = "alert-danger";
             if (player1.indexOf(5) !== -1) {
@@ -128,7 +138,8 @@ function checkForBingo() {
             setTimeout(() => {
                 document.getElementById("startGame").classList.remove("hide");
             }, 3000);
-            document.getElementById("callSquare").classList.add("hide");
+            document.getElementById("callSquare").classList.remove("hide");
+            document.getElementById("playerOptions").classList.add("hide");
             document.getElementById(players[i]).classList.remove("alert-light");
             document.getElementById(players[i]).classList.add("alert-primary");
         }
@@ -148,7 +159,10 @@ function checkForBingo() {
     return false;
 }
 
-function startCalling() {
+function startCalling(option) {
+    if (option === "manual" && theInterval !== null) {
+        return false;
+    }
     document.getElementById("callSquare").disabled = true;
     const targetLength = calledPublically.length + 1;
     let b = 15;
@@ -211,7 +225,7 @@ function verifysquare(squareInfo) {
             document.querySelector("li[data-value='" + squareInfo + "']").classList.remove("alert-danger");
         }, 3000)
     }
-    startCalling();
+    startCalling("manual");
 }
 
 function runGame(target) {
@@ -260,13 +274,13 @@ function runGame(target) {
     }
     document.getElementById(target).innerHTML = cardHTML;
     if (target === "player4") {
-        startCalling();
+        startCalling("manual");
     }
 
 }
 
 function startGame(playerBet) {
-    console.log("START Game");
+    let ckTimer = localStorage.getItem("bingoTimer");
     gameOver = false;
     player1 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     player2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -281,13 +295,56 @@ function startGame(playerBet) {
     document.getElementById("betTarget").innerHTML = "Bet: $" + bet;
     document.getElementById("calledList").innerHTML = "";
     document.getElementById("startGame").classList.add("hide");
-    document.getElementById("callSquare").classList.remove("hide");
+    document.getElementById("playerOptions").classList.remove("hide");
     document.getElementById("selectedItem").innerHTML = "Select Square to begin.";
 
     for (let i = 0; i < players.length; i++) {
         runGame(players[i]);
     }
+
+    if (ckTimer === "on") {
+        theInterval = null;
+        toggleTimer()
+    }
+
 }
 
 
+function toggleTimer() {
 
+
+
+    if (!theInterval) {
+
+        theInterval = setInterval(startCalling, 5000);
+        //  theInterval = settheInterval(startCalling, 5000);
+        document.querySelector("i[data-timer]").classList.remove("far");
+        document.querySelector("i[data-timer]").classList.add("fas");
+        document.querySelector("i[data-timer]").setAttribute("data-timer", true);
+
+        document.getElementById("timerOn").classList.add("active");
+        document.getElementById("timerOn").disabled = true;
+        document.getElementById("timerOff").classList.remove("active");
+        document.getElementById("timerOff").disabled = false;
+        document.getElementById("callSquare").classList.add("hide");
+        localStorage.setItem("bingoTimer", "on");
+    } else {
+        document.querySelector("i[data-timer]").classList.remove("fas");
+        document.querySelector("i[data-timer]").classList.add("far");
+        document.querySelector("i[data-timer]").setAttribute("data-timer", false);
+
+
+        document.getElementById("timerOn").classList.remove("active");
+        document.getElementById("timerOn").disabled = false;
+        document.getElementById("timerOff").classList.add("active");
+        document.getElementById("timerOff").disabled = true;
+        document.getElementById("callSquare").classList.remove("hide");
+        localStorage.setItem("bingoTimer", "off");
+        clearInterval(theInterval);
+        theInterval = null;
+
+    }
+
+
+
+}

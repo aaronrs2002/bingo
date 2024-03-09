@@ -84,17 +84,21 @@
 
 
 
+            <div class="btn-group form-control mb-2 hide" role="group" id="playerOptions">
 
+                <button type="button" class="btn btn-primary" id="timerOn" onClick="toggleTimer()">Play with timer <i
+                        data-timer="false" class="pointer far fa-clock"></i> </button>
 
+                <button type="button" class="btn btn-primary active" id="timerOff" onClick="toggleTimer()" disabled>Play
+                    at your pace</button>
 
-
-            <div class="d-grid gap-2 col-12 mx-auto ">
-                <button class="btn btn-primary  px-0 hide" onClick="startCalling()" id="callSquare">Select Next
+                <button class="btn btn-primary  px-0 " onClick="startCalling('manual')" id="callSquare">Select Next
                     Square</button>
 
 
-
             </div>
+
+
             <div class="col-md-12">
 
                 <div id="calledList"></div>
@@ -148,7 +152,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
     <div class="hide alert fadeInUp" role="alert" id="globalAlert"></div>
