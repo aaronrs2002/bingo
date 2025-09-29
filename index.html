@@ -51,7 +51,10 @@
             <div class="col-md-12">
                 <div class="btn-group form-control mb-2  animated fadeInDown" role="group" id="startGame"
                     alt="Free Bingo Online">
-                    <button type="button" class="btn btn-primary" alt="1" onClick="startGame(Number(1))">$1</button>
+                    <button type="button" class="btn btn-primary dealAmt" alt="any" id="betAny"
+                        onClick="toggle('anyAmount')">Any
+                        $</button>
+                    <!--<button type="button" class="btn btn-primary" alt="1" onClick="startGame(Number(1))">$1</button>-->
                     <button type="button" class="btn btn-primary" alt="5" onClick="startGame(Number(5))">$5</button>
                     <button type="button" class="btn btn-primary" alt="10" onClick="startGame(Number(10))">$10</button>
                     <button type="button" class="btn btn-primary" alt="25" onClick="startGame(Number(25))">$25</button>
@@ -60,7 +63,14 @@
                         onClick="startGame(Number(100))">$100</button>
                 </div>
             </div>
+            <div class="col-md-12 hide" data-toggle="anyAmount">
 
+                <div class="input-group mb-3">
+                    <input type="number" class="form-control" name="anyAmount"
+                        placeholder="Any Amount. Numerical characters only please." onKeyUp="updateBetAny()">
+                    <button class="btn btn-primary" onClick="startGame('any')">Bet</button>
+                </div>
+            </div>
             <div class="col-md-12">
                 <div class="alert alert-info" role="alert">
                     <div class="row">

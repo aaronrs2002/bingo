@@ -284,6 +284,15 @@ function runGame(target) {
 }
 
 function startGame(playerBet) {
+    if (playerBet === "any") {
+        playerBet = Number(document.querySelector("[name='anyAmount']").value);
+        document.getElementById("betAny").setAttribute("alt", playerBet);
+        document.querySelector("[name='anyAmount']").value = "";
+    }
+    toggle("");
+
+
+
     let ckTimer = localStorage.getItem("bingoTimer");
     gameOver = false;
     player1 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
