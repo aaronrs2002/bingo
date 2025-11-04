@@ -23,6 +23,7 @@ function setPlayerMoney(passPlayerMoney, status) {
         if (status === "won") {
             playerMoney = (passPlayerMoney + (bet * 4));
             gameOver = true;
+            ckHighScore();
         } else {
             playerMoney = passPlayerMoney - bet;
             gameOver = true;
@@ -34,6 +35,7 @@ function setPlayerMoney(passPlayerMoney, status) {
     } else {
         return false;
     }
+
 }
 
 let player1 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
